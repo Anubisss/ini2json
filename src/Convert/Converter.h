@@ -27,6 +27,16 @@ class Converter
 {
 public:
     static void Convert(ParsedFile const* parsedFile);
+private:
+    /**
+     * Prints the JSON output to console (STDOUT) and to a file.
+     */
+    static void Print(std::string text);
+
+    /**
+     * The output file.
+     /*
+    static std::ofstream _fileStream;
 };
 
 #endif /* __CONVERTER_H__ */

@@ -18,12 +18,14 @@
 #include "Converter.h"
 
 #include <iostream>
-#include <fstream>
+#include <sstream>
 
 #define FILE_EXTENSION_DELIMITER    "."
 #define JSON_FILE_EXTENSION         "json"
 
-void Converter::Convert(ParsedFile const* parsedFile)
+/*static */ std::ofstream  Converter::_fileStream;
+
+/* static */ void Converter::Convert(ParsedFile const* parsedFile)
 {
     std::cerr << "[INFO] Converting to JSON..." << std::endl;
 
@@ -39,19 +41,19 @@ void Converter::Convert(ParsedFile const* parsedFile)
     fileName += FILE_EXTENSION_DELIMITER;
     fileName += JSON_FILE_EXTENSION;
 
-    std::ofstream fileStream;
-    fileStream.open(fileName, std::ofstream::out);
-    if (!fileStream.good())
+    _fileStream.open(fileName, std::ofstream::out);
+    if (!_fileStream.good())
     {
         std::cerr << "[ERROR] Can't write to file: " << fileName << std::endl;
-        fileStream.close();
+        _fileStream.close();
         return;
     }
 
     // the ugly part...
 
-    std::cout << "{" << std::endl;
-    fileStream << "{" << std::endl;
+    std::stringstream ss;
+    ss << "{" << std::endl;
+    Print(ss.str());
 
     bool firstSection = true;
     bool firstProperty = true;
@@ -68,20 +70,19 @@ void Converter::Convert(ParsedFile const* parsedFile)
             if (!firstProperty &&
                 lastSection == parsedLine->GetProperty()->Section)
             {
-                std::cout << "," << std::endl;
-                fileStream << "," << std::endl;
+                ss.str(std::string()); // resets the stringstream
+                ss << "," << std::endl;
+                Print(ss.str());
             }
             if (parsedLine->GetProperty()->Section)
-            {
-                std::cout << "    ";
-                fileStream << "    ";
-            }
-            std::cout << "    \"" << parsedLine->GetProperty()->Key << "\":\""
-                      << parsedLine->GetProperty()->Value  << "\"";
-            fileStream << "    \"" << parsedLine->GetProperty()->Key << "\":\""
-                       << parsedLine->GetProperty()->Value  << "\"";
-            lastSection = parsedLine->GetProperty()->Section;
+                Print("    ");
 
+            ss.str(std::string());
+            ss << "    \"" << parsedLine->GetProperty()->Key << "\":\""
+               << parsedLine->GetProperty()->Value  << "\"";
+            Print(ss.str());
+
+            lastSection = parsedLine->GetProperty()->Section;
             firstProperty = false;
             emptySection = false;
         }
@@ -91,23 +92,25 @@ void Converter::Convert(ParsedFile const* parsedFile)
             {
                 if (!emptySection)
                 {
-                    std::cout << std::endl;
-                    fileStream << std::endl;
+                    ss.str(std::string());
+                    ss << std::endl;
+                    Print(ss.str());
                 }
-                std::cout << "    }," << std::endl;
-                fileStream << "    }," << std::endl;
+                ss.str(std::string());
+                ss << "    }," << std::endl;
+                Print(ss.str());
             }
             if (firstSection && !firstProperty)
             {
-                std::cout << "," << std::endl;
-                fileStream << "," << std::endl;
+                ss.str(std::string());
+                ss << "," << std::endl;
+                Print(ss.str());
             }
-            std::cout << "    \"" << parsedLine->GetSection()->Name
-                      << "\":" << std::endl;
-            std::cout << "    {" << std::endl;
-            fileStream << "    \"" << parsedLine->GetSection()->Name
+            ss.str(std::string());
+            ss << "    \"" << parsedLine->GetSection()->Name
                        << "\":" << std::endl;
-            fileStream << "    {" << std::endl;
+            ss << "    {" << std::endl;
+            Print(ss.str());
 
             firstSection = false;
             emptySection = true;
@@ -117,20 +120,31 @@ void Converter::Convert(ParsedFile const* parsedFile)
     {
         if (!emptySection)
         {
-            std::cout << std::endl;
-            fileStream << std::endl;
+            ss.str(std::string());
+            ss << std::endl;
+            Print(ss.str());
         }
-        std::cout << "    }" << std::endl;
-        fileStream << "    }" << std::endl;
+        ss.str(std::string());
+        ss << "    }" << std::endl;
+        Print(ss.str());
     }
     else if (!firstSection || !firstProperty)
     {
-        std::cout << std::endl;
-        fileStream << std::endl;
+        ss.str(std::string());
+        ss << std::endl;
+        Print(ss.str());
     }
 
-    std::cout << "}" << std::endl;
-    fileStream << "}" << std::endl;
+    ss.str(std::string());
+    ss << "}" << std::endl;
+    Print(ss.str());
 
-    fileStream.close();
+    _fileStream.close();
+}
+
+/* static */ void Converter::Print(std::string text)
+{
+    // as simple as that :)
+    std::cout << text;
+    _fileStream << text;
 }
