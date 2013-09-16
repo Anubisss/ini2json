@@ -1,0 +1,17 @@
+{
+    "outOfSecionKey":"Value",
+    "Section one":
+    {
+        "key":"value",
+        "key2":"value"
+    },
+    "section twoooo":
+    {
+        "foo":"bar"
+    },
+    "three":
+    {
+        "lol":"wut",
+        "omnom  ":"nomnom"
+    }
+}
