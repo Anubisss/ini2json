@@ -3,17 +3,38 @@
 
 
 
-   ini2json is a simple converter written in C++. It can convert an INI file
+ini2json is a simple converter written in C++. It can convert an INI file
 to a JSON file.
 
-~ COMPILATION ~
-   If you want to compile ini2json from the source code
+                               ~ COMPILATION ~
+-------------------------------------------------------------------------------
+If you want to compile ini2json from the source code
 you have to generate the project files for your compiler with CMake.
-   CMake (http://www.cmake.org/) is an extensible, open-source
+CMake (http://www.cmake.org/) is an extensible, open-source
 system that manages the build process in an operating system
 and in a compiler-independent manner. You can download a GUI
 for your Windows OS and generate project files for example
 your Visual Studio.
+On linux you should do the following:
+    mkdir build && cd build
+    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr/bin
+    make
+    make install
+
+    CMAKE_INSTALL_PREFIX is the path where command "make install" will copy
+    the compiled ini2json binary.
+
+
+                                   ~ USAGE ~
+-------------------------------------------------------------------------------
+Use like a command in the command line.
+
+Windows: ini2json.exe example.ini
+Linux:   ./ini2json example.ini
+
+The input is the example.ini and the output will be the example.json
+As simple as that. :)
+
 
 
 Source code is available at: http://github.com/Anubisss/ini2json

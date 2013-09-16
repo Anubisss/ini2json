@@ -35,7 +35,7 @@ private:
 
     /**
      * The output file.
-     /*
+     */
     static std::ofstream _fileStream;
 };
 
