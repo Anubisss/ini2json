@@ -84,7 +84,7 @@ public:
      * ; Comment
      * # Comment
      */
-    static const bool IsCommentIndicator(const char c)
+    static bool IsCommentIndicator(const char c)
     {
         switch (c)
         {
@@ -99,15 +99,15 @@ public:
     /**
      * Opening and closing tags for sections and property delimiter.
      */
-    static const char GetSectionStartTag() { return '['; }
-    static const char GetSectionEndTag() { return ']'; }
-    static const char GetPopertyDelimiter() { return '='; }
+    static char GetSectionStartTag() { return '['; }
+    static char GetSectionEndTag() { return ']'; }
+    static char GetPopertyDelimiter() { return '='; }
 
-    static const bool IsSectionStartTag(const char c)
+    static bool IsSectionStartTag(const char c)
     {
         return c == GetSectionStartTag();
     }
-    static const bool IsSectionEndTag(const char c)
+    static bool IsSectionEndTag(const char c)
     {
         return c == GetSectionEndTag();
     }
