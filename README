@@ -12,10 +12,12 @@ If you want to compile ini2json from the source code
 you have to generate the project files for your compiler with CMake.
 CMake (http://www.cmake.org/) is an extensible, open-source
 system that manages the build process in an operating system
-and in a compiler-independent manner. You can download a GUI
-for your Windows OS and generate project files for example
-your Visual Studio.
-On linux you should do the following:
+and in a compiler-independent manner.
+
+You can download a GUI for your Windows and generate project files eg.
+for your Visual Studio.
+
+On Linux you should do the following:
     mkdir build && cd build
     cmake ../ -DCMAKE_INSTALL_PREFIX=/usr/bin
     make

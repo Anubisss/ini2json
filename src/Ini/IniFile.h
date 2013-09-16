@@ -54,7 +54,7 @@ public:
     {
         std::string Name;
 
-        Section::Section()
+        Section()
         {
             Name = "";
         }
@@ -69,9 +69,9 @@ public:
         std::string Key;
         std::string Value;
 
-        Section const* Section;
+        struct Section const* Section;
 
-        Property::Property()
+        Property()
         {
             Key = "";
             Value = "";

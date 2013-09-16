@@ -33,7 +33,7 @@ IniFile::~IniFile()
 
 bool IniFile::Open()
 {
-    _fileStream.open(_fileName, std::ifstream::in);
+    _fileStream.open(_fileName.c_str(), std::ifstream::in);
     if (_fileStream.fail())
     {
         Close();

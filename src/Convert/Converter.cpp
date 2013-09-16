@@ -41,7 +41,7 @@
     fileName += FILE_EXTENSION_DELIMITER;
     fileName += JSON_FILE_EXTENSION;
 
-    _fileStream.open(fileName, std::ofstream::out);
+    _fileStream.open(fileName.c_str(), std::ofstream::out);
     if (!_fileStream.good())
     {
         std::cerr << "[ERROR] Can't write to file: " << fileName << std::endl;

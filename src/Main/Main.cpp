@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
         }
         else
         {
-            std::cerr << "[ERROR] Can't open the file: " << i->GetFileName();
+            std::cerr << "[ERROR] Can't open the file: " << i->GetFileName() << std::endl;
             delete i;
             return 1;
         }
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     // no file name given
     else
     {
-        std::cerr << "[WARNING] You have to give an INI file via input argument.";
+        std::cerr << "[WARNING] You have to give an INI file via input argument." << std::endl;
         return 1;
     }
 

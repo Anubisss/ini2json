@@ -40,3 +40,5 @@ if(WIN32)
                        ${PROJECT_SOURCE_DIR}/COPYING
                        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(ConfigurationName)/)
 endif()
+
+install(TARGETS ini2json DESTINATION bin)
