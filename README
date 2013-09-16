@@ -1,0 +1,46 @@
+                                  ini2json                                 
+===============================================================================
+
+
+
+   ini2json is a simple converter written in C++. It can convert an INI file
+to a JSON file.
+
+COMPILATION:    If you want to compile ini2json from the source code
+             you have to generate the project files for your compiler with CMake.
+                CMake (http://www.cmake.org/) is an extensible, open-source
+             system that manages the build process in an operating system
+             and in a compiler-independent manner. You can download a GUI
+             for your Windows OS and generate project files for example
+             your Visual Studio.
+
+
+
+Source code is available at: http://github.com/Anubisss/ini2json
+
+Compiled binaries: http://github.com/Anubisss/ini2json/wiki/Download
+
+License: GNU GPLv3
+         COPYING file contains the license which should be distributed
+         with the software or visit http://www.gnu.org/licenses/gpl-3.0.html
+
+Screenshots: http://github.com/Anubisss/ini2json/wiki/Screenshots
+
+
+
+ini2json is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+ini2json is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with ini2json.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+===============================================================================
