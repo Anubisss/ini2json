@@ -17,17 +17,30 @@
 
 #include "Ini/IniFile.h"
 #include "Convert/Converter.h"
+#include "Convert/JsonToIniConverter.h"
 
 #include <iostream>
+#include <string>
 
 int main(int argc, char* argv[])
 {
-    IniFile* i = NULL;
-
-    if (argc > 1)
+    if (argc < 2)
     {
-        // first argument is the file which will be parsed
-        i = new IniFile(argv[1]);
+        std::cerr << "[WARNING] You have to give a file via input argument." << std::endl;
+        return 1;
+    }
+
+    std::string fileName = argv[1];
+    size_t dot = fileName.rfind('.');
+    std::string ext = (dot != std::string::npos) ? fileName.substr(dot + 1) : "";
+
+    if (ext == "json")
+    {
+        JsonToIniConverter::Convert(fileName);
+    }
+    else
+    {
+        IniFile* i = new IniFile(fileName);
         if (i->Open())
         {
             i->Parse();
@@ -36,16 +49,10 @@ int main(int argc, char* argv[])
         }
         else
         {
-            std::cerr << "[ERROR] Can't open the file: " << i->GetFileName() << std::endl;
+            std::cerr << "[ERROR] Can't open the file: " << fileName << std::endl;
             delete i;
             return 1;
         }
-    }
-    // no file name given
-    else
-    {
-        std::cerr << "[WARNING] You have to give an INI file via input argument." << std::endl;
-        return 1;
     }
 
     return 0;
